@@ -111,8 +111,8 @@ angular.module("ang-drag-drop",[])
 					            }
 				            });
 			            }
-
-			            e.dataTransfer.setData("dataToSend", sendData);
+                        //IE only supports the Text drag type
+			            e.dataTransfer.setData("Text", sendData);
 			            currentData = angular.fromJson(sendData);
 			            e.dataTransfer.effectAllowed = "copyMove";
 			            $rootScope.$broadcast("ANGULAR_DRAG_START", sendChannel, currentData.data);
@@ -211,8 +211,8 @@ angular.module("ang-drag-drop",[])
                     if (e.stopPropagation) {
                         e.stopPropagation(); // Necessary. Allows us to drop.
                     }
-
-                    var sendData = e.dataTransfer.getData("dataToSend");
+                    //IE only supports the Text drag type
+                    var sendData = e.dataTransfer.getData("Text");
                     sendData = angular.fromJson(sendData);
 
                     var fn = $parse(attr.uiOnDrop);
